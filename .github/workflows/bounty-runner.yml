@@ -1,7 +1,7 @@
 name: Opire & Stealth Bounty Runner
 on:
   schedule:
-    - cron: '*/40 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -30,10 +30,11 @@ jobs:
         run: |
           python runner.py || true
 
-      - name: Run Opire Sniper
+      - name: Run Opire Solver Engine
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
           TELEGRAM_BOT_TOKEN: "8693469191:AAEaEszFTAibl8bUAnkqe9hDN3-p4DMB8A0"
           TELEGRAM_CHAT_ID: "7572064021"
+          WORKER_ID: ${{ secrets.WORKER_ID }}
         run: |
-          python opire_sniper.py
+          python opire_solver.py || true
